@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Lovely Animals</title>
+    <style type="text/css">
+
+    button,
+    div,
+    form,
+    input {
+    margin: 10px;
+    }
+
+    body{
+        background-color: skyblue;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <h1>Animal Search</h1>
+
+    <div id="buttons-view"></div>
+    <form id="animals">
+        <label for="animal-input">Find The Cutest Animals!</label>
+        <input type="text" id="animal-input">
+        <br>
+
+        <input id="add-animal" type="submit" value="Add a animal, Yo!">
+    </form>
+
+    <div id="animal-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    var animals = ["Cats", "Dogs", "Rabbits", "Goldfish"];
+    function displayAnimalsInfo() {
+
+        var animals = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animals + "&api_key=XR124ivtfbi3u4ZFUhnNmdWDGXUeTY6L=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=XR124ivtfbi3u4ZFUhnNmdWDGXUeTY6L=10";
+        
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+
+            var tjPark=response;
+
+            console.log(queryURL);
+
+            console.log(response);
+
+            var animalDiv = $("<div class='animal'>");
+
+            var pOne = $("<p>").text("Rating: " + rating);
+                
+                animalDiv.prepend(pOne);
+
+            var released = response.Released;
+           
+            var pTwo = $("<p>").text("Released: " + released);
+
+                animalDiv.prepend(pTwo);
+
+            var plot = response.Plot;
+            
+            var pThree = $("<p>").text("Plot: " + plot);
+
+                animalDiv.prepend(pThree);
+            
+            var imgURL = response.Poster;
+            
+            var image = $("<img>").attr("src", imgURL);
+
+                animalDiv.prepend(image);
+
+            $("#animal-view").prepend(movieDiv);
+
+            });
+
+        }
+        
+        function renderButtons() {
+        
+        $("#buttons-view").empty();
+
+        for (var i = 0; i < animals.length; i++) {
+
+            var a = $("<button>");
+          
+          a.addClass("animal-btn");
+          
+          a.attr("data-name", animals[i]);
+          
+          a.text(animals[i]);
+          
+          $("#buttons-view").append(a);
+        }
+      }
+
+      $("#add-animal").on("click", function(event) {
+
+        event.preventDefault();
+        
+        var animal = $("#animal-input").val().trim();
+
+        animals.push(animals);
+        renderButtons();       
+       
+      });
+      
+      $(document).on("click", ".animal-btn", displayAnimalsInfo);
+
+      renderButtons();
+
+    </script>
+
+  </div>
+
+</body>
+
+</html>
