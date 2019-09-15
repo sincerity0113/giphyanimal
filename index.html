@@ -1,130 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en-us">
 <head>
-
-    <meta charset="utf-8">
-    <title>Lovely Animals</title>
-    <style type="text/css">
-
-    button,
-    div,
-    form,
-    input {
-    margin: 10px;
-    }
-
-    body{
-        background-color: skyblue;
-    }
-    </style>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">      	
+	<title>Giftastic Animals</title>
 </head>
-
 <body>
 
-    <div class="container">
-    <h1>Animal Search</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Funny Animal Gifs: Click a Button!</h3>
+  </div>
+  <div class="panel-body">
+  		<div id="buttonDiv">
+   		 <p>movie buttons go here</p>
+    	</div>
+  </div>
+</div>
 
-    <div id="buttons-view"></div>
-    <form id="animals">
-        <label for="animal-input">Find The Cutest Animals!</label>
-        <input type="text" id="animal-input">
-        <br>
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="giphyResults">
+				<div id="giphyDiv">
+			  	</div>
+			</div>
+		</div>
 
-        <input id="add-animal" type="submit" value="Add a animal, Yo!">
-    </form>
+	</div>
+	<div class="col-md-4">
+		<div class="userInput">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">What animal do you want to see?</h3>
+			  </div>
+			  <div class="panel-body">
+			    
+			    <form>
+				  <div class="form-group">
+				    <label for="input">Pick an animal</label>
+				    <input type="text" class="form-control" id="formInput">
+				  </div>
+				  <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+				</form>
 
-    <div id="animal-view"></div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-    var animals = ["Cats", "Dogs", "Rabbits", "Goldfish"];
-    function displayAnimalsInfo() {
-
-        var animals = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animals + "&api_key=XR124ivtfbi3u4ZFUhnNmdWDGXUeTY6L=10";
-        var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=XR124ivtfbi3u4ZFUhnNmdWDGXUeTY6L=10";
-        
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response) {
-
-            var tjPark=response;
-
-            console.log(queryURL);
-
-            console.log(response);
-
-            var animalDiv = $("<div class='animal'>");
-
-            var pOne = $("<p>").text("Rating: " + rating);
-                
-                animalDiv.prepend(pOne);
-
-            var released = response.Released;
-           
-            var pTwo = $("<p>").text("Released: " + released);
-
-                animalDiv.prepend(pTwo);
-
-            var plot = response.Plot;
-            
-            var pThree = $("<p>").text("Plot: " + plot);
-
-                animalDiv.prepend(pThree);
-            
-            var imgURL = response.Poster;
-            
-            var image = $("<img>").attr("src", imgURL);
-
-                animalDiv.prepend(image);
-
-            $("#animal-view").prepend(movieDiv);
-
-            });
-
-        }
-        
-        function renderButtons() {
-        
-        $("#buttons-view").empty();
-
-        for (var i = 0; i < animals.length; i++) {
-
-            var a = $("<button>");
-          
-          a.addClass("animal-btn");
-          
-          a.attr("data-name", animals[i]);
-          
-          a.text(animals[i]);
-          
-          $("#buttons-view").append(a);
-        }
-      }
-
-      $("#add-animal").on("click", function(event) {
-
-        event.preventDefault();
-        
-        var animal = $("#animal-input").val().trim();
-
-        animals.push(animals);
-        renderButtons();       
-       
-      });
-      
-      $(document).on("click", ".animal-btn", displayAnimalsInfo);
-
-      renderButtons();
-
-    </script>
-
-  </div>
-
+	<script src="assets/javascript.js"></script>
 </body>
-
 </html>

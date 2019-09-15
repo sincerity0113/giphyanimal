@@ -1,0 +1,11 @@
+body {
+	margin: 40px;
+	background: url(../assets/grumpy-cat.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+};
+
+.movieButton {
+	margin: 10px;
+};
